@@ -43,17 +43,16 @@ class VentaController extends Controller
                     ->select(Db::raw('CONCAT(articulo.codigo," ",articulo.nombre) as articulo'),'articulo.id','articulo.stock',DB::raw('avg(detalle_ingresos.precio_venta) as precio_promedio'))
                     ->where('articulo.estado','=','activo')
                     ->where('articulo.stock','>','0')
+                    ->groupBy('articulo','articulo.id','articulo.stock')
                     ->get();
         
         return view('ventas.venta.create',["personas"=>$personas,"articulos"=>$articulos]);
-
-        
 
     }
 
     public function store(VentaFormRequest $request)
     {
-        //
+        
     }
 
     public function show($id)
