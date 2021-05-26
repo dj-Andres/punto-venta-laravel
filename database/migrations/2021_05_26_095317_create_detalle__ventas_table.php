@@ -22,7 +22,7 @@ class CreateDetalleVentasTable extends Migration
             $table->decimal('descuento',11,2);
 
             $table->foreign('venta_id')->references('idventa')->on('ventas')->onDelete('cascade');
-            $table->foreign('articulo_id')->references('idpersona')->on('persona')->onDelete('cascade');
+            $table->foreign('articulo_id')->references('id')->on('articulo')->onDelete('cascade');
 
             $table->timestamps();
         });

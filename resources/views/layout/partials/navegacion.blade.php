@@ -90,6 +90,14 @@
                         </p>
                     </a>
                 </li>
+                <li id="gestion_proveedor" class="nav-item">
+                    <a href="{{route('venta.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-money-check"></i>
+                        <p>
+                            Gestión de Ventas
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
 </aside>
