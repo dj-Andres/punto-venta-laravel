@@ -222,53 +222,63 @@
         };
 
         $(document).on('click','#btn-agregar',(e)=>{
-
             e.preventDefault();
-
-            let id_articulo = $('#articulo').trigger("change");
+            let datosArticulos = document.getElementById('articulo').value.split('_');
+            let id_articulo = datosArticulos[0];
             let articulo = $('#articulo option:selected').text();
             let cantidad = $('#cantidad').val();
+            let descuento = $("#descuento").val();
             let precio_venta = $('#precio_venta').val();
-            let precio_compra = $('#precio_compra').val();
+            let stock = $('#stock').val();
 
-            if(id_articulo != "" && articulo != "" && cantidad != "" && precio_compra != "" && precio_venta != "")
+            if(id_articulo != "" && articulo != "" && cantidad != "" && cantidad > 0 && precio_venta != "" && descuento != "" && stock != "")
             {
-                Subtotal[count] = (cantidad * precio_compra);
-                total = total + Subtotal[count];
+                if(stock >= cantidad)
+                {
+                    Subtotal[count] = (cantidad * precio_venta - descuento);
+                    total = total + Subtotal[count];
 
-                let fila =
-                  `<tr class="selected" id="fila${count}">
-                        <td>
-                            <button class="elimar-art btn btn-warning"><i class="fas fa-times-circle"></i></button>
-                        </td>
-                        <td>
-                            <input type="hidden" name="id_articulo[]" value="${id_articulo}">${articulo}
-                        </td>
-                        <td>
-                            <input type="number" name="cantidad[]" class="form-control" value="${cantidad}">
-                        </td>
-                        <td>
-                            <input type="number" name="precio_compra[]" class="form-control" value="${precio_compra}">
-                        </td>
-                        <td>
-                            <input type="number" name="precio_venta[]" class="form-control" value="${precio_venta}">
-                        </td>
-                        <td>
-                            ${Subtotal[count]}
-                        </td>
-                    </tr>`;
+                    let fila =
+                    `<tr class="selected" id="fila${count}">
+                            <td>
+                                <button class="elimar-art btn btn-warning"><i class="fas fa-times-circle"></i></button>
+                            </td>
+                            <td>
+                                <input type="hidden" name="id_articulo[]" value="${id_articulo}">${articulo}
+                            </td>
+                            <td>
+                                <input type="number" name="cantidad[]" class="form-control" value="${cantidad}">
+                            </td>
+                            <td>
+                                <input type="number" name="precio_venta[]" class="form-control" value="${precio_venta}">
+                            </td>
+                            <td>
+                                <input type="number" name="descuento[]" class="form-control" value="${descuento}">
+                            </td>
+                            <td>
+                                ${Subtotal[count]}
+                            </td>
+                        </tr>`;
 
-                count++;
-                clear();
-                $('#total').html("$ "+total);
-                evaluar();
-                $('#detalles').append(fila);
+                        count++;
+                        clear();
+                        $('#total').html("$ "+total);
+                        $("#total_venta").val(total); 
+                        evaluar();
+                        $('#detalles').append(fila);
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'La cantidad solicitada a vender supera al Stock!',
+                    });    
+                }
 
             }else{
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'No se puede dejar campos vacios, por favor llenar todos los campos!',
+                    text: 'Hubo problemas en proceso de ingresar el detalle de la venta!',
                 });
             }
         });
@@ -284,15 +294,17 @@
         function clear(){
             let cantidad = $('#cantidad').val("");
             let precio_venta = $('#precio_venta').val("");
-            let precio_compra = $('#precio_compra').val("");
+            let descuento = $("#descuento").val("");
         }
 
         $(document).on('click','.elimar-art',(e)=>{
             let elememto = $(this)[0].activeElement.parentElement.parentElement;
             total = total-Subtotal[elememto];
             $('#total').html("$ "+total);
+            $("#total_venta").val(total);
             //$('#fila'elememto).remove();
             elememto.remove();
+            evaluar();
         });
     });
 </script>

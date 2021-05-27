@@ -4,7 +4,7 @@
         <div class="col sm-12">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('categoria.index') }}">Home</a></li>
-                <li class="breadcrumb-item active">Lista de Ingresos</li>
+                <li class="breadcrumb-item active">Lista de Ventas</li>
             </ol>
         </div>
     </div>
@@ -12,14 +12,14 @@
         <div class="container-fluid">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Detalle de Ingresos</h3>
+                    <h3 class="card-title">Detalle de Ventas</h3>
                 </div>
                 <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    {!! Form::label('proveedor', 'Porveedor') !!}
-                                    <p>{{$ingreso->nombre}}</p>
+                                    {!! Form::label('cliente', 'Cliente') !!}
+                                    <p>{{$venta->nombre}}</p>
                                 </div>
                             </div>
 
@@ -28,19 +28,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('tipo_comprobante', 'Tipo de Comprobante') !!}
-                                    <p>{{$ingreso->tipo_comprobante}}</p>
+                                    <p>{{$venta->tipo_comprobante}}</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('serie_comprobante', 'Serie Comprobante') !!}
-                                    <p>{{$ingreso->serie_comprobante}}</p>
+                                    <p>{{$venta->serie_comprobante}}</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('num_comprobante', 'Numero Comprobante') !!}
-                                    <p>{{$ingreso->num_comprobante}}</p>
+                                    <p>{{$venta->num_comprobante}}</p>
                                 </div>
                             </div>
 
@@ -53,8 +53,8 @@
                                             <tr>
                                                 <th>Articulo</th>
                                                 <th>Cantidad</th>
-                                                <th>Precio Compra</th>
                                                 <th>Precio Venta</th>
+                                                <th>Descuento</th>
                                                 <th>Subtotal</th>
                                             </tr>
                                         </thead>
@@ -64,15 +64,8 @@
                                             <th></th>
                                             <th></th>
                                             <th>
-                                                @php
-                                                    $suma = 0;
-                                                @endphp    
                                                 <h4 id="total">
-                                                    $
-                                                    @php
-                                                        $suma+=$ingreso->cantidad*$ingreso->precio_compra;
-                                                    @endphp
-                                                    {{$suma}}
+                                                    {{ $venta->total_venta}}
                                                 </h4>
                                             </th>
                                         </tfoot>
@@ -81,9 +74,9 @@
                                                 <tr>
                                                     <td>{{$detalle->articulo}}</td>
                                                     <td>{{$detalle->cantidad}}</td>
-                                                    <td>{{$detalle->precio_compra}}</td>
                                                     <td>{{$detalle->precio_venta}}</td>
-                                                    <td>{{$detalle->cantidad * $detalle->precio_compra}}</td>
+                                                    <td>{{$detalle->descuento}}</td>
+                                                    <td>{{$detalle->cantidad * $detalle->precio_venta - $detalle->descuento}}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -93,6 +86,9 @@
                         </div>
                 </div>
                 <div class="card-footer">
+                    <div>
+                        <a href="{{ route('venta.index') }}" class="btn btn-primary">Regresar</a>
+                    </div>
                 </div>
             </div>
         </div>

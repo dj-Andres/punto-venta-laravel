@@ -10,11 +10,13 @@
         </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-        <a href="#" class="nav-link">Cerrar Sessión</a>
+        <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
     </ul>
-
     <!-- Right navbar links -->
-
 </nav>
 <!-- /.navbar -->
 

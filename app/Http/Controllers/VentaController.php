@@ -17,6 +17,11 @@ use Illuminate\Support\Collection;
 class VentaController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         if ($request) {
@@ -85,7 +90,6 @@ class VentaController extends Controller
 
                 $count = $count + 1;
             }
-
             Db::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -99,7 +103,7 @@ class VentaController extends Controller
         $venta = DB::table('ventas')
             ->join('persona', 'ventas.cliente_id', '=', 'persona.idpersona')
             ->join('detalle__ventas', 'ventas.idventa', '=', 'detalle__ventas.venta_id')
-            ->select('ventas.idventa', 'ventas.fecha_hora', 'ventas.tipo_comprobante', 'ventas.serie_comprobante', 'ventas.num_comprobante', 'ventas.impuesto', 'ventas.estado', 'ventas.total_venta')
+            ->select('ventas.idventa','persona.nombre', 'ventas.fecha_hora', 'ventas.tipo_comprobante', 'ventas.serie_comprobante', 'ventas.num_comprobante', 'ventas.impuesto', 'ventas.estado', 'ventas.total_venta')
             ->where('ventas.idventa', '=', $id)
             ->first();
 
