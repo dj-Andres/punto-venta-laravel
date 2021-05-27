@@ -78,17 +78,17 @@ class VentaController extends Controller
             $descuento = $request->get('descuento');
             $precio_venta = $request->get('precio_venta');
 
-            $count = 0;
+            $cont = 0;
 
-            while ($count < count($idarticulo)) {
+            while ($cont < count($idarticulo)) {
                 $detalle = new Detalle_Venta;
-                $detalle->venta_id = $venta->id;
-                $detalle->cantidad = $cantidad[$count];
-                $detalle->descuento = $descuento[$count];
-                $detalle->precio_venta = $precio_venta[$count];
+                $detalle->venta_id = $venta->idventa;
+                $detalle->cantidad = $cantidad[$cont];
+                $detalle->descuento = $descuento[$cont];
+                $detalle->precio_venta = $precio_venta[$cont];
                 $detalle->save();
 
-                $count = $count + 1;
+                $cont = $cont + 1;
             }
             Db::commit();
         } catch (\Exception $e) {

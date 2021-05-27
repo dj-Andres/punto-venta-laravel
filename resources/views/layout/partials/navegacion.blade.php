@@ -46,8 +46,15 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-   with font-awesome or any other icon font library -->
+                <li class="nav-header">Usuarios</li>
+                <li class="nav-item">
+                    <a href="{{route('usuario.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-user-alt"></i>
+                        <p>
+                            Gestión de Usuarios
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">CATEGORIAS</li>
                 <li class="nav-item">
                     <a href="{{route('categoria.index')}}" class="nav-link">

@@ -6,15 +6,11 @@
         <title>Punto de Venta</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!---Estilos del menu de compras--->
-        <!-- Theme style -->
-        <link rel="stylesheet" href="{{asset('css/main.css')}}">
-        <!---Estilos del pagima de compras--->
-        <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
         <!---Estilos del graficos--->
         <link rel="stylesheet" href="{{asset('css/Chart.min.css')}}">
         <!---Estilos del pagima de compras--->
         <link rel="stylesheet" href="{{asset('css/compra.css')}}">
+        
         <link rel="shortcut icon" href="{{asset('img/LogoSample_ByTailorBrands.ico')}}" type="image/x-icon">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}">

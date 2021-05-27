@@ -20,7 +20,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     {!! Form::label('proveedor', 'Porveedor') !!}
-                                    <select name="proveedor" id="proveedor" class="form-control" style="width:100%">
+                                    <select id="proveedor" name="proveedor_id" class="form-control" style="width:100%">
                                         @foreach ($personas as $persona)
                                             <option value="{{ $persona->idpersona }}">{{ $persona->nombre }}</option>
                                         @endforeach
@@ -81,7 +81,7 @@
                                 <div class="form-group">
                                     {!! Form::label('articulo', 'Articulo') !!}
 
-                                    <select name="articulo" id="articulo" class="form-control" style="width:100%">
+                                    <select id="articulo" name="articulo_id" class="form-control" style="width:100%">
                                         @foreach ($articulos as $articulo)
                                             <option class="form-control" value="{{ $articulo->id }}" style="width:100%">
                                                 {{ $articulo->articulo }}</option>
