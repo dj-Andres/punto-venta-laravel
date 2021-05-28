@@ -19,6 +19,10 @@ class Detalle_ingreso extends Model
         'precio_venta'
     ];
 
+    protected $guarded =[
+
+    ];
+
     public function ingreso()
     {
         return $this->belongsTo(Ingreso::class);

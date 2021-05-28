@@ -72,20 +72,20 @@ class IngresoController extends Controller
             $precio_compra = $request->get('precio_compra');
             $precio_venta = $request->get('precio_venta');
 
-            $count = 0;
+            $cont = 0;
 
-            while ($count <= count($id_articulo)) {
+
+            while ($cont < count($id_articulo)) {
 
                 $detalle = new Detalle_ingreso();
                 $detalle->ingreso_id = $ingreso->idingreso;
-                $detalle->articulo_id = $id_articulo[$count];
-                $detalle->cantidad = $cantidad[$count];
-                $detalle->precio_compra = $precio_compra[$count];
-                $detalle->precio_venta = $precio_venta[$count];
+                $detalle->articulo_id = $id_articulo[$cont];
+                $detalle->cantidad = $cantidad[$cont];
+                $detalle->precio_compra = $precio_compra[$cont];
+                $detalle->precio_venta = $precio_venta[$cont];
                 $detalle->save();
-                $count = $count + 1;
+                $cont = $cont + 1;
             }
-
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();

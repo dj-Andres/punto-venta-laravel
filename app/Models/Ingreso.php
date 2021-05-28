@@ -20,6 +20,11 @@ class Ingreso extends Model
         'impuesto',
         'estado'
     ]; 
+
+    protected $guarded =[
+
+    ];
+    
     //use HasFactory;
     public function proveedor(){
         return $this->belongsTo(Persona::class);
